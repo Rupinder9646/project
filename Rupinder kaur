@@ -1,0 +1,1873 @@
+import os
+import matplotlib.pyplot as plt
+import numpy as np
+import os
+import cv2
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from PIL import Image
+from matplotlib import pyplot as plt
+from matplotlib import image as mpimg
+
+dir_path = "/content/drive/MyDrive/bone-break-classifier-dataset"
+
+# Get list of image file names in the directory
+file_names = os.listdir(dir_path)
+
+print("The classes of fracture:")
+for i in range(len(file_names)):
+    print(i+1,file_names[i])
+import os
+from PIL import Image
+
+# Path to the directory containing image files
+directory = '/content/drive/MyDrive/bone-break-classifier-dataset/Longitudinal fracture/Longitudinal fracture'
+
+# Loop through all files in the directory
+for filename in os.listdir(directory):
+    # Check if the file is an image file
+    if filename.endswith('.jpg') or filename.endswith('.png'):
+        # Open the image using PIL
+        with Image.open(os.path.join(directory, filename)) as img:
+            # Get the size of the image (width, height)
+            size = img.size
+            # Do something with the image
+
+# List to store the sizes of the images
+image_sizes = []
+
+# Loop through all files in the directory
+for filename in os.listdir(directory):
+    # Check if the file is an image file
+    if filename.endswith('.jpg') or filename.endswith('.png'):
+        # Open the image using PIL
+        with Image.open(os.path.join(directory, filename)) as img:
+            # Get the size of the image (width, height)
+            size = img.size
+            # Append the image size to the list
+            image_sizes.append(size)
+
+# Check if the list is empty
+if not image_sizes:
+    print("No images found in the directory.")
+else:
+    # Find the maximum image size
+    max_size = max(image_sizes, key=lambda x: max(x))
+    # Print the maximum image size
+    print("Maximum image size:", max_size)
+
+
+# List to store the sizes of the images
+image_sizes = []
+
+# Loop through all files in the directory
+for filename in os.listdir(directory):
+    # Check if the file is an image file
+    if filename.endswith('.jpg') or filename.endswith('.png'):
+        # Open the image using PIL
+        with Image.open(os.path.join(directory, filename)) as img:
+            # Get the size of the image (width, height)
+            size = img.size
+            # Append the image size to the list
+            image_sizes.append(size)
+
+# Convert the list to a NumPy array
+image_sizes = np.array(image_sizes)
+
+# Check if the array is empty
+if image_sizes.size == 0:
+    print("No images found in the directory.")
+else:
+    # Create a figure and axis for the plot
+    fig, ax = plt.subplots()
+
+    # Use the scatter() function to create a scatter plot
+    # image_sizes[:, 0] selects the width values from all rows of the image_sizes array
+    # image_sizes[:, 1] selects the height values from all rows of the image_sizes array
+    # alpha=0.1 sets the transparency of the points to 0.1 (more transparent)
+    ax.scatter(image_sizes[:, 0], image_sizes[:, 1], alpha=0.1)
+
+    # Set the x-axis label
+    ax.set_xlabel('Width')
+
+    # Set the y-axis label
+    ax.set_ylabel('Height')
+
+    # Set the title of the plot
+    ax.set_title('Distribution of image sizes')
+
+    # Display the plot
+    plt.show()
+# Create a figure and axis for the plot
+fig, ax = plt.subplots()
+
+# Create a scatter plot of image sizes
+# image_sizes[:, 0] selects the width values from all rows of the image_sizes array
+# image_sizes[:, 1] selects the height values from all rows of the image_sizes array
+# alpha=0.1 sets the transparency of the points to 0.1 (more transparent)
+ax.scatter(image_sizes[:, 0], image_sizes[:, 1], alpha=0.1)
+
+# Set the x-axis label
+ax.set_xlabel('Width')
+
+# Set the y-axis label
+ax.set_ylabel('Height')
+
+# Set the title of the plot
+ax.set_title('Distribution of image sizes 2000 x 2000')
+
+# Set the x-axis limits to show images up to 2000 in width
+ax.set_xlim(0, 2000)
+
+# Set the y-axis limits to show images up to 2000 in height
+ax.set_ylim(0, 2000)
+
+# Display the plot
+plt.show()
+# Create a figure and axis for the plot
+fig, ax = plt.subplots()
+
+# Create a scatter plot of image sizes
+# image_sizes[:, 0] selects the width values from all rows of the image_sizes array
+# image_sizes[:, 1] selects the height values from all rows of the image_sizes array
+# alpha=0.1 sets the transparency of the points to 0.1 (more transparent)
+ax.scatter(image_sizes[:, 0], image_sizes[:, 1], alpha=0.1)
+
+# Set the x-axis label
+ax.set_xlabel('Width')
+
+# Set the y-axis label
+ax.set_ylabel('Height')
+
+# Set the title of the plot
+ax.set_title('Distribution of image sizes 500 x 500')
+
+# Set the x-axis limits to show images up to 500 in width
+ax.set_xlim(0, 500)
+
+# Set the y-axis limits to show images up to 500 in height
+ax.set_ylim(0, 500)
+
+# Display the plot
+plt.show()
+import os
+from PIL import Image
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Path to the directory containing image files
+dir_path = '/content/drive/MyDrive/bone-break-classifier-dataset/Longitudinal fracture'
+# Get the list of subdirectory names (classes)
+subdir_names = os.listdir(dir_path)
+
+# Loop through each subdirectory and plot sizes of all images in that directory
+for i, subdir_name in enumerate(subdir_names):
+    # Create the path to the current subdirectory
+    subdir_path = os.path.join(dir_path, subdir_name)
+    # Get the list of file names in the subdirectory
+    file_names = os.listdir(subdir_path)
+
+    # Initialize an empty list to store sizes of images in this class
+    image_sizes = []
+
+    # Loop through each file in the subdirectory
+    for file_name in file_names:
+        # Create the path to the current image file
+        image_path = os.path.join(subdir_path, file_name)
+
+        # Check if the file is an image file
+        if file_name.endswith('.jpg') or file_name.endswith('.png'):
+            # Open the image using PIL (Python Imaging Library)
+            with Image.open(image_path) as img:
+                # Get the size of the image (width, height)
+                size = img.size
+                # Append the size to the list of image sizes for this class
+                image_sizes.append(size)
+
+    # Convert the list of image sizes to a numpy array for easier manipulation
+    image_sizes = np.array(image_sizes)
+
+    # Plot scatter plot of image sizes for this class
+    # Create a figure and axis for the plot
+    fig, ax = plt.subplots()
+    # Create a scatter plot of image sizes
+    # image_sizes[:, 0] selects the width values from all rows of the image_sizes array
+    # image_sizes[:, 1] selects the height values from all rows of the image_sizes array
+    # color='blue' sets the color of the points to blue
+    # alpha=0.5 sets the transparency of the points to 0.5 (semi-transparent)
+    ax.scatter(image_sizes[:, 0], image_sizes[:, 1], color='blue', alpha=0.5)
+    # Set the x-axis label
+    ax.set_xlabel('Width')
+    # Set the y-axis label
+    ax.set_ylabel('Height')
+    # Set the title of the plot to the name of the current class
+    ax.set_title(subdir_name)
+
+    # Print the number of images in this class
+    num_images = len(image_sizes)
+    print(f"Class {subdir_name} has {num_images} images.")
+
+    # Display the plot
+    plt.show()
+# Loop through each subdirectory and plot sizes of all images in that directory
+for i, subdir_name in enumerate(subdir_names):
+    # Create the path to the current subdirectory
+    subdir_path = os.path.join(dir_path, subdir_name)
+    # Get the list of file names in the subdirectory
+    file_names = os.listdir(subdir_path)
+
+    # Initialize an empty list to store sizes of images in this class
+    image_sizes = []
+
+    # Loop through each file in the subdirectory
+    for file_name in file_names:
+        # Create the path to the current image file
+        image_path = os.path.join(subdir_path, file_name)
+
+        # Open the image using PIL (Python Imaging Library)
+        with Image.open(image_path) as img:
+            # Get the size of the image (width, height)
+            size = img.size
+            # Check if both width and height are less than or equal to 2000
+            if size[0] <= 2000 and size[1] <= 2000:
+                # Append the size to the list of image sizes for this class
+                image_sizes.append(size)
+
+    # Convert the list of image sizes to a numpy array for easier manipulation
+    image_sizes = np.array(image_sizes)
+
+    # Plot scatter plot of image sizes for this class
+    # Create a figure and axis for the plot
+    fig, ax = plt.subplots()
+    # Create a scatter plot of image sizes
+    # image_sizes[:, 0] selects the width values from all rows of the image_sizes array
+    # image_sizes[:, 1] selects the height values from all rows of the image_sizes array
+    # color='blue' sets the color of the points to blue
+    # alpha=0.5 sets the transparency of the points to 0.5 (semi-transparent)
+    ax.scatter(image_sizes[:, 0], image_sizes[:, 1], color='blue', alpha=0.5)
+    # Set the x-axis label
+    ax.set_xlabel('Width')
+    # Set the y-axis label
+    ax.set_ylabel('Height')
+    # Set the title of the plot to the name of the current class
+    ax.set_title(subdir_name)
+
+    # Print the number of images in this class that are within 2000x2000 pixels
+    num_images = len(image_sizes)
+    print(f"Class {subdir_name} has {num_images} images within 2000x2000 pixels.")
+
+    # Display the plot
+    plt.show()
+# Loop through each subdirectory and plot sizes of all images in that directory
+for i, subdir_name in enumerate(subdir_names):
+    subdir_path = os.path.join(dir_path, subdir_name)
+    file_names = os.listdir(subdir_path)
+
+    # Initialize empty lists to store sizes of images in this class
+    image_sizes = []
+    for file_name in file_names:
+        image_path = os.path.join(subdir_path, file_name)
+        with Image.open(image_path) as img:
+            size = img.size
+            if size[0] <= 500 and size[1] <= 500:
+                image_sizes.append(size)
+
+    # Convert image sizes to numpy array
+    image_sizes = np.array(image_sizes)
+
+    # Plot scatter plot of image sizes for this class
+    fig, ax = plt.subplots()
+    ax.scatter(image_sizes[:, 0], image_sizes[:, 1], color='blue', alpha=0.5)
+    ax.set_xlabel('Width')
+    ax.set_ylabel('Height')
+    ax.set_title(subdir_name)
+
+    # Print number of images in this class
+    num_images = len(image_sizes)
+    print(f"Class {subdir_name} has {num_images} images within 1000 x 1000 pixels.")
+
+    plt.show()
+import os
+from PIL import Image
+import shutil
+
+dir_path = '/content/drive/MyDrive/bone-break-classifier-dataset/Comminuted fracture'
+
+# Create directories to store the two datasets
+os.makedirs('dataset_1', exist_ok=True)
+os.makedirs('dataset_2', exist_ok=True)
+
+# Loop through each subdirectory and copy images within 500 x 500 to dataset 1
+for subdir_name in os.listdir(dir_path):
+    subdir_path = os.path.join(dir_path, subdir_name)
+    for file_name in os.listdir(subdir_path):
+        file_path = os.path.join(subdir_path, file_name)
+        with Image.open(file_path) as img:
+            width, height = img.size
+            if width <= 500 and height <= 500:
+                dest_path = os.path.join('dataset_1', subdir_name)
+                os.makedirs(dest_path, exist_ok=True)
+                shutil.copy2(file_path, dest_path)
+
+# Loop through each subdirectory and copy images within 500 x 500 and 2000 x 2000 to dataset 2
+for subdir_name in os.listdir(dir_path):
+    subdir_path = os.path.join(dir_path, subdir_name)
+    for file_name in os.listdir(subdir_path):
+        file_path = os.path.join(subdir_path, file_name)
+        with Image.open(file_path) as img:
+            width, height = img.size
+            if 500 <= width <= 2000 and 500 <= height <= 2000:
+                dest_path = os.path.join('dataset_2', subdir_name)
+                os.makedirs(dest_path, exist_ok=True)
+                shutil.copy2(file_path, dest_path)
+import os
+
+dir_path = 'dataset_1'
+
+# Get list of subdirectory names in the main directory
+subdir_names = os.listdir(dir_path)
+
+# Loop through each subdirectory and count the number of files
+for subdir_name in subdir_names:
+    subdir_path = os.path.join(dir_path, subdir_name)
+    file_names = os.listdir(subdir_path)
+    num_files = len(file_names)
+    print(f"{subdir_name}: {num_files} images")
+import os
+
+dir_path = 'dataset_2'
+
+# Get list of subdirectory names in the main directory
+subdir_names = os.listdir(dir_path)
+
+# Loop through each subdirectory and count the number of files
+for subdir_name in subdir_names:
+    subdir_path = os.path.join(dir_path, subdir_name)
+    file_names = os.listdir(subdir_path)
+    num_files = len(file_names)
+    print(f"{subdir_name}: {num_files} images")
+# Path to the original dataset folder
+input_folder = 'dataset_1'
+
+# Path to the output folder
+output_folder = 'dataset_1_bgr'
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Convert each image file in the current folder to BGR and save to the output folder
+    for file in files:
+            # Load the image
+            img = cv2.imread(os.path.join(root, file))
+            # Convert to BGR
+            try:
+              img_bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+              # Save to the output folder
+              cv2.imwrite(os.path.join(output_folder, root, file), img_bgr)
+            except:
+              print('Error')
+dir_path1 = '/content/drive/MyDrive/bone-break-classifier-dataset/Avulsion fracture'
+dir_path2 = '/content/dataset_1_bgr'
+
+# Avulsion
+fileName = "/content/drive/MyDrive/bone-break-classifier-dataset/Avulsion fracture/Avulsion fracture/220px-Avulsion_fracture_of_tibial_tuberosity2C_annotated.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Avulsion')
+plt.show()
+
+# Comminuted
+fileName = "Comminuted fracture/image20.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Comminuted')
+plt.show()
+# Compression Crush
+fileName = "Compression-Crush fracture/image21.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Compression')
+plt.show()
+
+# Fracture Dislocation
+
+fileName = "Fracture Dislocation/0b0927c9e289f1b59085553d3ad46cf08b9566b76aa840d0a17d33c6e626825d_gallery.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Fracture Dislocation')
+plt.show()
+
+# GreenStick
+fileName = "Greenstick fracture/15ff6b9162cf7c04caad3fbd4f4a2e_gallery.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('GreenStick')
+plt.show()
+
+# Hairline
+fileName = "Hairline Fracture/180px-Tibial_stress_fracture.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Hairline')
+plt.show()
+# Impacted
+fileName = "Impacted fracture/125176fig03a.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Impacted')
+plt.show()
+
+
+# Intra-articular
+fileName = "Intra-articular fracture/images4.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Intra-articular')
+plt.show()
+
+# Longitudinal
+fileName = "Longitudinal fracture/56a7a5e4ed51b2f23052775923c9c4_gallery.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Longitudinal')
+plt.show()
+
+# Oblique
+fileName = "Oblique fracture/image13.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Oblique')
+plt.show()
+
+# Pathological
+fileName = "Pathological fracture/8-2010728x6.png"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Pathological')
+plt.show()
+
+# Spiral
+fileName = "Spiral Fracture/7590tn.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Spiral')
+plt.show()
+import os
+import cv2
+
+# Path to the original dataset folder
+input_folder = './dataset_1_bgr/dataset_1'
+
+# Path to the output folder
+output_folder = 'dataset_1_resized'
+
+# Target size of the images
+target_size = (224, 224)
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Resize each image file in the current folder and save to the output folder
+    for file in files:
+        # Load the image
+        img = cv2.imread(os.path.join(root, file))
+        # Resize the image to the target size
+        img_resized = cv2.resize(img, target_size)
+        # Save to the output folder
+        cv2.imwrite(os.path.join(output_folder, root, file), img_resized)
+dir_path1 = 'dataset_1_bgr/dataset_1/'
+dir_path2 = 'dataset_1_resized/dataset_1_bgr/dataset_1/'
+
+# Avulsion
+fileName = "Avulsion fracture/Xray-pic-300x226.png"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Avulsion')
+plt.show()
+
+# Comminuted
+fileName = "Comminuted fracture/image20.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Comminuted')
+plt.show()
+
+# Compression Crush
+fileName = "Compression-Crush fracture/image21.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Compression')
+plt.show()
+
+# Fracture Dislocation
+
+fileName = "Fracture Dislocation/0b0927c9e289f1b59085553d3ad46cf08b9566b76aa840d0a17d33c6e626825d_gallery.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Fracture Dislocation')
+plt.show()
+
+# GreenStick
+fileName = "Greenstick fracture/15ff6b9162cf7c04caad3fbd4f4a2e_gallery.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('GreenStick')
+plt.show()
+
+# Hairline
+fileName = "Hairline Fracture/180px-Tibial_stress_fracture.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Hairline')
+plt.show()
+# Impacted
+fileName = "Impacted fracture/125176fig03a.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Impacted')
+plt.show()
+
+
+# Intra-articular
+fileName = "Intra-articular fracture/images4.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Intra-articular')
+plt.show()
+
+# Longitudinal
+fileName = "Longitudinal fracture/56a7a5e4ed51b2f23052775923c9c4_gallery.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Longitudinal')
+plt.show()
+
+# Oblique
+fileName = "Oblique fracture/image13.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Oblique')
+plt.show()
+
+# Pathological
+fileName = "Pathological fracture/8-2010728x6.png"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Pathological')
+plt.show()
+
+# Spiral
+fileName = "Spiral Fracture/7590tn.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(10, 5))
+axs[0].imshow(image1)
+axs[0].set_title('RGB Image')
+axs[1].imshow(image2)
+axs[1].set_title('BGR Image')
+fig.suptitle('Spiral')
+plt.show()
+
+input_folder = 'dataset_1_resized/dataset_1_bgr/dataset_1'
+
+output_folder = 'rotated_dataset'
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Select the first 5 images from the current folder and apply one data augmentation to each image
+    selected_files = files
+    for file in selected_files:
+        # Load the image and apply a random data augmentation transform
+        img = Image.open(os.path.join(root, file))
+        transform = RandomRotation(degrees=15)
+        augmented_img = transform(img)
+        # Save the augmented image to the output folder with the augmentation name appended to the original image name
+        augmentation_name = transform.__class__.__name__
+        output_file = file
+        augmented_img.save(os.path.join(output_folder, root, output_file))
+
+# Define the input and output directories
+output_folder = 'rotatedH_dataset'
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Select the first 5 images from the current folder and apply one data augmentation to each image
+    selected_files = files
+    for file in selected_files:
+        # Load the image and apply a random data augmentation transform
+        img = Image.open(os.path.join(root, file))
+        transform = RandomHorizontalFlip()
+        augmented_img = transform(img)
+        # Save the augmented image to the output folder with the augmentation name appended to the original image name
+        augmentation_name = transform.__class__.__name__
+        output_file = file
+        augmented_img.save(os.path.join(output_folder, root, output_file))
+# Define the input and output directories
+output_folder = 'rotatedV_dataset'
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Select the first 5 images from the current folder and apply one data augmentation to each image
+    selected_files = files
+    for file in selected_files:
+        # Load the image and apply a random data augmentation transform
+        img = Image.open(os.path.join(root, file))
+        transform = RandomVerticalFlip()
+        augmented_img = transform(img)
+        # Save the augmented image to the output folder with the augmentation name appended to the original image name
+        augmentation_name = transform.__class__.__name__
+        output_file = file
+        augmented_img.save(os.path.join(output_folder, root, output_file))
+# Define the input and output directories
+output_folder = 'colorJ_dataset'
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Select the first 5 images from the current folder and apply one data augmentation to each image
+    selected_files = files
+    for file in selected_files:
+        # Load the image and apply a random data augmentation transform
+        img = Image.open(os.path.join(root, file))
+        transform = ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.2)
+        augmented_img = transform(img)
+        # Save the augmented image to the output folder with the augmentation name appended to the original image name
+        augmentation_name = transform.__class__.__name__
+        output_file = file
+        augmented_img.save(os.path.join(output_folder, root, output_file))
+dir_path1 = 'dataset_1_resized/dataset_1_bgr/dataset_1/'
+dir_path2 = 'rotatedH_dataset/dataset_1_resized/dataset_1_bgr/dataset_1/'
+dir_path3 = 'rotatedV_dataset/dataset_1_resized/dataset_1_bgr/dataset_1/'
+dir_path4 = 'rotated_dataset/dataset_1_resized/dataset_1_bgr/dataset_1/'
+dir_path5 = 'colorJ_dataset/dataset_1_resized/dataset_1_bgr/dataset_1/'
+
+# Avulsion
+fileName = "Avulsion fracture/Xray-pic-300x226.png"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('Avulsion')
+plt.show()
+
+# Comminuted
+fileName = "Comminuted fracture/image20.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('Compression')
+plt.show()
+
+
+
+# Fracture Dislocation
+
+fileName = "Fracture Dislocation/0b0927c9e289f1b59085553d3ad46cf08b9566b76aa840d0a17d33c6e626825d_gallery.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('Fracture Dislocation')
+plt.show()
+
+# GreenStick
+fileName = "Greenstick fracture/15ff6b9162cf7c04caad3fbd4f4a2e_gallery.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('GreenStick')
+plt.show()
+
+# Hairline
+fileName = "Hairline Fracture/180px-Tibial_stress_fracture.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('Hairline')
+plt.show()
+
+
+# Impacted
+fileName = "Impacted fracture/125176fig03a.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('Impacted')
+plt.show()
+
+
+# Intra-articular
+fileName = "Intra-articular fracture/images4.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('Intra-articular')
+plt.show()
+
+# Longitudinal
+fileName = "Longitudinal fracture/56a7a5e4ed51b2f23052775923c9c4_gallery.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('Longitudinal')
+plt.show()
+
+# Oblique
+fileName = "Oblique fracture/image13.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('Oblique')
+plt.show()
+
+# Pathological
+fileName = "Pathological fracture/8-2010728x6.png"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('Pathological')
+plt.show()
+
+# Spiral
+fileName = "Spiral Fracture/7590tn.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+
+fig, axs = plt.subplots(1, 5, figsize=(20, 5))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('Horizontal Flip')
+axs[2].imshow(image3)
+axs[2].set_title('Vertical File')
+axs[3].imshow(image4)
+axs[3].set_title('Rotated')
+axs[4].imshow(image5)
+axs[4].set_title('ColorJ')
+
+fig.suptitle('Spiral')
+plt.show()
+
+# Set the path to the original dataset folder
+
+from PIL import Image, ImageFilter
+import os
+input_folder = 'dataset_1_resized/dataset_1_bgr/dataset_1'
+
+# Set the path to the folder where the blurred images will be saved
+output_folder = "gaussian_blur"
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Select the first 5 images from the current folder and apply Gaussian blur to each image
+    selected_files = files
+    for file in selected_files:
+        # Load the image and apply Gaussian blur with a randomly selected radius
+        img = Image.open(os.path.join(root, file))
+        radius = 3  # Select a random radius between 1 and 5
+        blur_img = img.filter(ImageFilter.GaussianBlur(radius=radius))
+        # Save the blurred image to the output folder with the blur radius appended to the original image name
+        output_file = file
+        blur_img.save(os.path.join(output_folder, root, output_file))
+
+import cv2
+import os
+
+# Set the path to the original dataset folder
+input_folder = 'dataset_1_resized/dataset_1_bgr/dataset_1'
+
+# Set the path to the folder where the thresholded images will be saved
+output_folder = "thresholded"
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Select the first 5 images from the current folder and apply thresholding to each image
+    selected_files = files
+    for file in selected_files:
+        # Load the image and apply thresholding to create a binary image
+        img = cv2.imread(os.path.join(root, file), cv2.IMREAD_GRAYSCALE)
+        threshold = 127  # Set the threshold value
+        _, threshold_img = cv2.threshold(img, threshold, 255, cv2.THRESH_BINARY)
+        # Save the thresholded image to the output folder
+        output_file = file
+        cv2.imwrite(os.path.join(output_folder, root, output_file), threshold_img)
+
+import cv2
+import numpy as np
+import os
+
+# Set the path to the original dataset folder
+input_folder = 'dataset_1_resized/dataset_1_bgr/dataset_1'
+
+# Set the path to the folder where the sharpened images will be saved
+output_folder = "sharpened"
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Select the first 5 images from the current folder and apply sharpening to each image
+    selected_files = files
+    for file in selected_files:
+        # Load the image and apply sharpening using a 3x3 kernel
+        img = cv2.imread(os.path.join(root, file))
+        kernel = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]], dtype=np.float32)  # Define the kernel for sharpening
+        sharpened_img = cv2.filter2D(img, -1, kernel)
+        # Save the sharpened image to the output folder
+        output_file = file
+        cv2.imwrite(os.path.join(output_folder, root, output_file), sharpened_img)
+import cv2
+import os
+
+# Set the path to the original dataset folder
+input_folder = 'dataset_1_resized/dataset_1_bgr/dataset_1'
+
+# Set the path to the folder where the contour images will be saved
+output_folder = "contour"
+
+# Set the threshold value for contour detection
+threshold_value = 127
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Select the first 5 images from the current folder and apply contour detection to each image
+    selected_files = files
+    for file in selected_files:
+        # Load the image and convert it to grayscale
+        img = cv2.imread(os.path.join(root, file))
+        gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        # Apply binary thresholding to create a binary image
+        _, binary_img = cv2.threshold(gray_img, threshold_value, 255, cv2.THRESH_BINARY)
+        # Find contours in the binary image
+        contours, _ = cv2.findContours(binary_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        # Draw the contours on the original image and save it to the output folder
+        contour_img = cv2.drawContours(img, contours, -1, (0, 0, 255), 2)
+        output_file = file
+        cv2.imwrite(os.path.join(output_folder, root, output_file), contour_img)
+import cv2
+import os
+
+# Set the path to the original dataset folder
+input_folder = 'dataset_1_resized/dataset_1_bgr/dataset_1'
+
+# Set the path to the folder where the adaptive threshold images will be saved
+output_folder = "adaptive_threshold"
+
+# Set the block size and constant value for adaptive thresholding
+block_size = 15
+constant_value = 2
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Select the first 5 images from the current folder and apply adaptive thresholding to each image
+    selected_files = files
+    for file in selected_files:
+        # Load the image and convert it to grayscale
+        img = cv2.imread(os.path.join(root, file))
+        gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        # Apply adaptive thresholding to create a binary image
+        binary_img = cv2.adaptiveThreshold(gray_img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, block_size, constant_value)
+        # Save the binary image to the output folder
+        output_file = file
+        cv2.imwrite(os.path.join(output_folder, root, output_file), binary_img)
+dir_path1 = 'dataset_1_resized/dataset_1_bgr/dataset_1/'
+dir_path2 = 'gaussian_blur/dataset_1_resized/dataset_1_bgr/dataset_1/'
+dir_path3 = 'contour/dataset_1_resized/dataset_1_bgr/dataset_1/'
+dir_path4 = 'sharpened/dataset_1_resized/dataset_1_bgr/dataset_1/'
+dir_path5 = 'thresholded/dataset_1_resized/dataset_1_bgr/dataset_1/'
+dir_path6 = 'adaptive_threshold/dataset_1_resized/dataset_1_bgr/dataset_1/'
+
+# Avulsion
+
+x = 20
+y = 5
+
+fileName = "Avulsion fracture/Xray-pic-300x226.png"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+
+fig.suptitle('Avulsion')
+plt.show()
+
+# Comminuted
+fileName = "Comminuted fracture/image20.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+fig.suptitle('Compression')
+plt.show()
+
+
+
+# Fracture Dislocation
+
+fileName = "Fracture Dislocation/0b0927c9e289f1b59085553d3ad46cf08b9566b76aa840d0a17d33c6e626825d_gallery.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+
+fig.suptitle('Fracture Dislocation')
+plt.show()
+
+# GreenStick
+
+fileName = "Greenstick fracture/15ff6b9162cf7c04caad3fbd4f4a2e_gallery.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+fig.suptitle('GreenStick')
+plt.show()
+
+# Hairline
+
+fileName = "Hairline Fracture/180px-Tibial_stress_fracture.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+
+fig.suptitle('Hairline')
+plt.show()
+
+
+# Impacted
+
+fileName = "Impacted fracture/125176fig03a.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+
+fig.suptitle('Impacted')
+plt.show()
+
+
+# Intra-articular
+fileName = "Intra-articular fracture/images4.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+
+fig.suptitle('Intra-articular')
+plt.show()
+
+# Longitudinal
+fileName = "Longitudinal fracture/56a7a5e4ed51b2f23052775923c9c4_gallery.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+
+fig.suptitle('Longitudinal')
+plt.show()
+
+# Oblique
+
+fileName = "Oblique fracture/image13.jpeg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+
+fig.suptitle('Oblique')
+plt.show()
+
+# Pathological
+
+fileName = "Pathological fracture/8-2010728x6.png"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+fig.suptitle('Pathological')
+plt.show()
+
+# Spiral
+
+fileName = "Spiral Fracture/7590tn.jpg"
+path1 = dir_path1 + fileName
+path2 = dir_path2 + fileName
+path3 = dir_path3 + fileName
+path4 = dir_path4 + fileName
+path5 = dir_path5 + fileName
+path6 = dir_path6 + fileName
+
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+image3 = mpimg.imread(path3)
+image4 = mpimg.imread(path4)
+image5 = mpimg.imread(path5)
+image6 = mpimg.imread(path6)
+
+fig, axs = plt.subplots(1, 6, figsize=(x, y))
+
+axs[0].imshow(image1)
+axs[0].set_title('Normal')
+axs[1].imshow(image2)
+axs[1].set_title('gaussian blur')
+axs[2].imshow(image3)
+axs[2].set_title('contour')
+axs[3].imshow(image4)
+axs[3].set_title('sharpened')
+axs[4].imshow(image5)
+axs[4].set_title('thresholded')
+axs[5].imshow(image6)
+axs[5].set_title('adaptive_threshold')
+
+fig.suptitle('Spiral')
+plt.show()
+
+dir_path = '/kaggle/input/bone-break-classifier-dataset'
+classNames = os.listdir(dir_path)
+
+from sklearn.preprocessing import LabelEncoder
+
+# Create a LabelEncoder object
+le = LabelEncoder()
+
+# Fit the label encoder on the class names and transform them to numerical labels
+class_labels = le.fit_transform(classNames)
+for i in range(len(classNames)):
+  print(classNames[i],':',class_labels[i])
+
+import cv2
+import os
+
+# Set the path to the original dataset folder
+input_folder = 'dataset_1_resized/dataset_1_bgr/dataset_1'
+
+# Set the path to the folder where the contour images will be saved
+output_folder = "test"
+
+# Set the threshold value for contour detection
+threshold_value = 150
+
+# Set the kernel size for image smoothing
+kernel_size = 5
+
+# Set the line thickness for drawn contours
+line_thickness = 1
+
+# Walk through all subfolders and files in the input folder
+for root, dirs, files in os.walk(input_folder):
+    # Create corresponding subdirectories in the output folder
+    for dir in dirs:
+        os.makedirs(os.path.join(output_folder, root, dir), exist_ok=True)
+    # Select the first 5 images from the current folder and apply contour detection to each image
+    selected_files = files
+    for file in selected_files:
+
+
+        img = cv2.imread(os.path.join(root, file))
+
+        # Load the image and convert it to grayscale
+        gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        kernel = np.array([[-1,-1,-1], [-1,9,-1], [-1,-1,-1]], dtype=np.float32)  # Define the kernel for sharpening
+        img = cv2.filter2D(gray_img, -1, kernel)
+
+        # Apply Gaussian blur for smoothing
+        blur_img = cv2.GaussianBlur(img, (kernel_size, kernel_size), 0)
+
+        # Apply binary thresholding to create a binary image
+        _, binary_img = cv2.threshold(blur_img, threshold_value, 255, cv2.THRESH_BINARY)
+
+        # Find contours in the binary image using the CV_CHAIN_APPROX_TC89_KCOS method
+        contours, _ = cv2.findContours(binary_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_TC89_KCOS)
+
+        # Draw the contours on the original image with thinner line thickness and save it to the output folder
+        contour_img = cv2.drawContours(img, contours, -1, (0, 0, 255), line_thickness)
+        output_file = file
+        cv2.imwrite(os.path.join(output_folder, root, output_file), contour_img)
+
+dir_path_test = 'test/dataset_1_resized/dataset_1_bgr/dataset_1/'
+dir_path_test1 = 'dataset_1/'
+
+x = 20
+y = 5
+
+fileName = "Avulsion fracture/Xray-pic-300x226.png"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
+fileName = "Comminuted fracture/image20.jpeg"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
+fileName = "Fracture Dislocation/0b0927c9e289f1b59085553d3ad46cf08b9566b76aa840d0a17d33c6e626825d_gallery.jpeg"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
+fileName = "Greenstick fracture/15ff6b9162cf7c04caad3fbd4f4a2e_gallery.jpg"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
+fileName = "Hairline Fracture/180px-Tibial_stress_fracture.jpg"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
+fileName = "Impacted fracture/125176fig03a.jpeg"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
+fileName = "Intra-articular fracture/images4.jpg"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
+fileName = "Longitudinal fracture/56a7a5e4ed51b2f23052775923c9c4_gallery.jpg"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
+fileName = "Oblique fracture/image13.jpeg"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
+fileName = "Pathological fracture/8-2010728x6.png"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
+fileName = "Spiral Fracture/7590tn.jpg"
+path1 = dir_path_test + fileName
+path2 = dir_path_test1 + fileName
+image1 = mpimg.imread(path1)
+image2 = mpimg.imread(path2)
+fig, axs = plt.subplots(1, 2, figsize=(x, y))
+axs[0].imshow(image1)
+axs[0].set_title('Avulsion')
+axs[1].imshow(image2)
+axs[1].set_title('Avulsion')
+
